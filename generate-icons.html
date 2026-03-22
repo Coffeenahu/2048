@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head><title>Icon Generator</title></head>
+<body>
+<canvas id="c192" width="192" height="192"></canvas>
+<canvas id="c512" width="512" height="512"></canvas>
+<br>
+<button onclick="download('c192','icon-192.png')">Download 192x192</button>
+<button onclick="download('c512','icon-512.png')">Download 512x512</button>
+
+<script>
+function drawIcon(id) {
+  const canvas = document.getElementById(id);
+  const size = canvas.width;
+  const ctx = canvas.getContext('2d');
+  const r = size * 0.12;
+
+  // Background
+  ctx.fillStyle = '#776e65';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, size, size, r);
+  ctx.fill();
+
+  // Text
+  ctx.fillStyle = '#f9f6f2';
+  ctx.font = `bold ${size * 0.42}px Arial, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('2048', size / 2, size / 2);
+}
+
+drawIcon('c192');
+drawIcon('c512');
+
+function download(id, filename) {
+  const a = document.createElement('a');
+  a.href = document.getElementById(id).toDataURL('image/png');
+  a.download = filename;
+  a.click();
+}
+</script>
+</body>
+</html>
